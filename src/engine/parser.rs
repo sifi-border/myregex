@@ -1,4 +1,4 @@
-//! 正規表現の式をパースし、抽象構文木に変換
+//! parse regular expression and convert to AST 
 
 use std::{
     error::Error,
@@ -6,7 +6,7 @@ use std::{
     mem::take,
 };
 
-/// 抽象構文木を表現するための型
+/// Type for implimenting AST(abstract syntax tree)
 #[derive(Debug)]
 pub enum AST {
     Char(char),
@@ -16,3 +16,38 @@ pub enum AST {
     Or(Box<AST>, Box<AST>),
     Seq(Vec<AST>),
 }
+
+#[derive(Debug)]
+pub enum ParseError {
+    InvalidEscape(usize, char), // wrong escape
+    InvalidRightParen(usize),   //
+    NoPrev(usize),              // no expression before +, |, *, ?
+    NoRightParen,               //
+    Empty,                      // empty expression
+}
+
+/// For displaying ParseError
+impl Display for ParseError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            ParseError::InvalidEscape(pos, c) => {
+                write!(f, "ParseError: invalid escape: pos = {pos}, char = '{c}'")
+            }
+            ParseError::InvalidRightParen(pos) => {
+                write!(f, "ParseError: invalid right parenthesis: pos = {pos}")
+            }
+            ParseError::NoPrev(pos) => {
+                write!(f, "ParseError: no previous expression: pos = {pos}")
+            }
+            ParseError::NoRightParen => {
+                write!(f, "ParseError: no right parenthesis")
+            }
+            ParseError::Empty => {
+                write!(f, "ParseError: empty expression")
+            }
+        }
+    }
+}
+
+impl Error for ParseError {}
+
