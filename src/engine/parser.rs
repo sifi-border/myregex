@@ -159,7 +159,6 @@ pub fn parse(expr: &str) -> Result<AST, ParseError> {
                         let prev = take(&mut seq);
                         seq_or.push(AST::Seq(prev));
                     }
-                    unimplemented!()
                 }
                 '\\' => state = ParseState::Escape,
                 _ => seq.push(AST::Char(c)),
