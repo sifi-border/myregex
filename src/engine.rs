@@ -2,6 +2,7 @@ use std::fmt::Display;
 
 mod parser;
 mod codegen;
+mod evaluator;
 
 #[derive(Debug)]
 pub enum Instruction {
