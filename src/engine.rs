@@ -1,6 +1,7 @@
 use std::fmt::Display;
 
 mod parser;
+mod codegen;
 
 #[derive(Debug)]
 pub enum Instruction {
