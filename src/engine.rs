@@ -1,8 +1,11 @@
+//! regular expression engine
+
+use crate::helper::DynError;
 use std::fmt::Display;
 
-mod parser;
 mod codegen;
 mod evaluator;
+mod parser;
 
 #[derive(Debug)]
 pub enum Instruction {
