@@ -1,3 +1,4 @@
+//! receives instruction string and input string and executes matching
 use super::Instruction;
 use crate::helper::safe_add;
 use std::{
@@ -115,6 +116,13 @@ fn eval_width(inst: &[Instruction], line: &[char]) -> Result<bool, EvalError> {
     }
 }
 
+/// function to evaluate a sequence of instructions.
+///
+/// inst becomes an instruction string, and matches the input string line using that instruction string.
+/// if is_depth is true, depth-first search is performed; if is_depth is false, width-first search is performed.
+///
+/// returns Err if a runtime error occurs.
+/// returns Ok(true) if the match succeeds, Ok(false) if it fails.
 pub fn eval(inst: &[Instruction], line: &[char], use_dfs: bool) -> Result<bool, EvalError> {
     if use_dfs {
         eval_depth(inst, line, 0, 0)
