@@ -26,6 +26,34 @@ impl Display for Instruction {
     }
 }
 
+/// parses regular expressions and generates code,
+/// display AST and instruction sequence on standard output.
+///
+/// # example usage
+///
+/// ````
+/// use myregex;.
+/// myregex::print("abc|(de|cd)+");
+/// ```
+///
+/// # return value
+///
+/// returns Err if there is an error in the input regular expression or an internal implementation error.
+pub fn print(expr: &str) -> Result<(), DynError> {
+    println!("expr: {expr}");
+    let ast = parser::parse(expr)?;
+    println!("AST: {:?}", ast);
+
+    println!();
+    println!("code!");
+    let code = codegen::get_code(&ast)?;
+    for (n, i) in code.iter().enumerate() {
+        println!("{:>04}: {i}", n);
+    }
+
+    Ok(())
+}
+
 /// match a regular expression with a string.
 ///
 /// # example usage
