@@ -31,8 +31,8 @@ impl Display for Instruction {
 /// # example usage
 ///
 /// ```
-/// use regex;
-/// regex::do_matching("abc|(de|cd)+", "decddede", true);
+/// use myregex;
+/// myregex::do_matching("abc|(de|cd)+", "decddede", true);
 /// ```
 ///
 /// # arguments
