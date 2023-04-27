@@ -31,8 +31,8 @@ impl Display for Instruction {
 ///
 /// # example usage
 ///
-/// ````
-/// use myregex;.
+/// ```
+/// use myregex;
 /// myregex::print("abc|(de|cd)+");
 /// ```
 ///
