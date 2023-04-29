@@ -86,6 +86,9 @@ mod tests {
             assert!(do_matching("(abc)*", "abcabc", use_dfs).unwrap());
             assert!(do_matching("(ab|cd)+", "abcdcd", use_dfs).unwrap());
             assert!(do_matching("abc?", "ab", use_dfs).unwrap());
+            assert!(do_matching("(((a*)*)*)", "aaaaaaaaa", use_dfs).unwrap());
+            assert!(do_matching("(a*)*b", "aaaaaaaaab", use_dfs).unwrap());
+            assert!(do_matching("a**b", "aaaaaaaaab", use_dfs).unwrap());
 
             // parse ok, match fail
             assert!(!do_matching("abc|def", "efa", use_dfs).unwrap());
